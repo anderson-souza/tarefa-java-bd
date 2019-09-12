@@ -3,19 +3,21 @@ import javax.swing.JOptionPane;
 import com.andersonsouza.dao.PessoaDAO;
 import com.andersonsouza.model.Pessoa;
 
+/**
+ * Classe principal da aplicação.
+ * 
+ * @author ander
+ *
+ */
 public class Principal {
 
-	/**
-	 * Método main
-	 * 
-	 * @param args
-	 */
 	public static void main(String[] args) {
 
 		Pessoa p = criarPessoa();
-		PessoaDAO pessoaDAO = new PessoaDAO(p);
-		pessoaDAO.salvar();
-		pessoaDAO.listar();
+		PessoaDAO pessoaDAO = new PessoaDAO();
+		pessoaDAO.salvar(p);
+		System.out.println("***IMPRIMINDO OS RESULTADOS NO TERMINAL***");
+		pessoaDAO.imprimirTodosRegistros();
 	}
 
 	/**

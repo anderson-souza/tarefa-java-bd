@@ -1,51 +1,24 @@
 package com.andersonsouza.dao;
 
-import javax.persistence.EntityManager;
-
 import com.andersonsouza.model.Pessoa;
 
-public final class PessoaDAO extends DAO {
+/**
+ * Classe DAO do Model Pessoa. Extende a classe DAOGenerico que se encarregará
+ * de realizar as operações mais comuns de um CRUD.
+ * 
+ * @author ander
+ *
+ */
+public final class PessoaDAO extends DAOGenerico<Pessoa, String> {
 
-	private Pessoa pessoa;
-	private EntityManager manager;
-	private final String UNIT_NAME = "pessoa";
-
-	public PessoaDAO(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	/**
-	 * Salva uma pessoa no banco de dados
-	 */
-	@Override
-	public void salvar() {
-		manager = getEntityManager(UNIT_NAME);
-		try {
-			manager.getTransaction().begin();
-			manager.persist(this.pessoa);
-			manager.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			manager.getTransaction().rollback();
-		} finally {
-			manager.close();
-		}
-	}
+	private final static String UNIT_NAME = "pessoa";// Nome da Unidade mapeada nas configurações
 
 	/**
-	 * Lista no terminal todas as pessoas cadastradas no banco de dados
+	 * No construtor da classe é invocado a superclasse DAOGenerico passando a
+	 * classe Pessoa e o nome da Unidade que foi mapeada nas configurações do
+	 * Hibernate (persistence.xml).
 	 */
-	@Override
-	public void listar() {
-		manager = getEntityManager(UNIT_NAME);
-		try {
-			manager.getTransaction().begin();
-			manager.createQuery("from Pessoa", Pessoa.class).getResultList().stream().forEach(System.out::println);
-			manager.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			manager.close();
-		}
+	public PessoaDAO() {
+		super(Pessoa.class, UNIT_NAME);
 	}
 }

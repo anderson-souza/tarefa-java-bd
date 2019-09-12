@@ -11,8 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Classe Pessoa. Não foi criado o método setID nem na construção do objeto não
- * é possível
+ * Classe Modelo de uma Pessoa.
  * 
  * @author ander
  *
