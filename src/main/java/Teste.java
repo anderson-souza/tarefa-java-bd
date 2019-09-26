@@ -9,7 +9,7 @@ import com.andersonsouza.model.Pessoa;
  * @author ander
  *
  */
-public class Principal {
+public class Teste {
 
 	public static void main(String[] args) {
 
